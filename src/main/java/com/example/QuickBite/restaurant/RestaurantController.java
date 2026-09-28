@@ -1,5 +1,6 @@
 package com.example.QuickBite.restaurant;
 
+import jakarta.validation.Valid;
 import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,22 +24,22 @@ public class RestaurantController {
     }
 
     @PostMapping
-    public Restaurant createRestaurant(@RequestBody Restaurant restaurant){
+    public Restaurant createRestaurant(@Valid @RequestBody Restaurant restaurant){
         return restaurantService.createRestaurant(restaurant);
     }
 
     @GetMapping("/{id}")
-    public Optional<Restaurant> getRestaurantById (@PathVariable Long id){
+    public Restaurant getRestaurantById (@PathVariable Long id){
         return restaurantService.getRestaurantById(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteRestaurantById (@PathVariable long id){
+    public void deleteRestaurantById(@PathVariable Long id) {
         restaurantService.deleteRestaurantById(id);
     }
 
     @PutMapping("/{id}")
-    public Restaurant updateRestaurant(@PathVariable long id, @RequestBody Restaurant restaurant){
+    public Restaurant updateRestaurant(@PathVariable long id,@Valid @RequestBody Restaurant restaurant){
         return restaurantService.updateRestaurant(id,restaurant);
     }
 

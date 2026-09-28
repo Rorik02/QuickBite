@@ -1,6 +1,7 @@
 package com.example.QuickBite.restaurant;
 
 
+import com.example.QuickBite.exception.RestaurantNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,17 +24,23 @@ public class RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
-    public Optional<Restaurant> getRestaurantById(Long id){
-        return restaurantRepository.findById(id);
+    public Restaurant getRestaurantById(Long id){
+
+        return restaurantRepository
+                .findById(id)
+                .orElseThrow (()-> new RestaurantNotFoundException("Restaurant not found"));
     }
 
-    public void deleteRestaurantById(Long id) {
+    public void deleteRestaurantById(Long id){
+
+        getRestaurantById(id);
         restaurantRepository.deleteById(id);
+
     }
 
     public Restaurant updateRestaurant(Long id, Restaurant restaurant){
 
-        Restaurant existingRestaurant = restaurantRepository.getById(id);
+        Restaurant existingRestaurant = getRestaurantById(id);
 
         String name = restaurant.getName();
         existingRestaurant.setName(name);
