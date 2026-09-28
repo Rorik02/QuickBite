@@ -21,6 +21,15 @@ public class GlobalExceptionHandler {
                 .body(exception.getMessage());
     }
 
+    @ExceptionHandler(MenuItemNotFoundException.class)
+    public ResponseEntity<String> handleMenuItemNotFound(MenuItemNotFoundException exception){
+
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(exception.getMessage());
+    }
+
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleMethodArgumentNotValid(MethodArgumentNotValidException exception) {
         Map<String, String> errors = new LinkedHashMap<>();
