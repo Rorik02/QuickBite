@@ -29,4 +29,14 @@ public class AddressController {
         return addressService.getAddressByUserId(userId);
     }
 
+    @PostMapping("/restaurant/{restaurantId}")
+    public Address createAddressForRestaurant(@PathVariable Long restaurantId,@Valid @RequestBody Address address){
+        return addressService.createAddressForRestaurant(restaurantId,address);
+    }
+
+    @GetMapping("/restaurant/{restaurantId}")
+    public Address getAddressByRestaurantId(@PathVariable Long restaurantId){
+        return addressService.getAddressByRestaurantId(restaurantId);
+    }
+
 }

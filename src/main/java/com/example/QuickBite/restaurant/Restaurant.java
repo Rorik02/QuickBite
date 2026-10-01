@@ -1,10 +1,8 @@
 package com.example.QuickBite.restaurant;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.QuickBite.address.Address;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -21,6 +19,10 @@ private String description;
 private String address;
 private String phoneNumber;
 private boolean active;
+
+@OneToOne
+@JoinColumn(name = "address_id")
+private Address restaurantAddress;
 
     public Restaurant(long id, String name, String description, String address, String phoneNumber, boolean active) {
         this.id = id;
@@ -81,5 +83,13 @@ private boolean active;
     }
 
     public Restaurant() {
+    }
+
+    public Address getRestaurantAddress() {
+        return restaurantAddress;
+    }
+
+    public void setRestaurantAddress(Address restaurantAddress) {
+        this.restaurantAddress = restaurantAddress;
     }
 }

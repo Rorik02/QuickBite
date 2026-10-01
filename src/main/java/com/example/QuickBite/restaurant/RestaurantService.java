@@ -1,6 +1,7 @@
 package com.example.QuickBite.restaurant;
 
 
+import com.example.QuickBite.address.Address;
 import com.example.QuickBite.exception.RestaurantNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +58,12 @@ public class RestaurantService {
         existingRestaurant.setActive(active);
 
         return restaurantRepository.save(existingRestaurant);
+    }
+
+    public Restaurant addAddressToRestaurant(Long restaurantId, Address address){
+        Restaurant actualRestaurant = getRestaurantById(restaurantId);
+        actualRestaurant.setRestaurantAddress(address);
+        return restaurantRepository.save(actualRestaurant);
     }
 
 }
