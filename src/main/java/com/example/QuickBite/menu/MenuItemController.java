@@ -1,5 +1,6 @@
 package com.example.QuickBite.menu;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
@@ -24,7 +25,7 @@ public class MenuItemController {
     }
 
     @PostMapping("restaurant/{restaurantId}")
-    public MenuItem createMenuItem(@PathVariable Long restaurantId,@RequestBody MenuItem menuItem){
+    public MenuItem createMenuItem(@PathVariable Long restaurantId,@Valid @RequestBody MenuItem menuItem){
         return menuItemService.createMenuItem(restaurantId,menuItem);
     }
 
@@ -39,7 +40,7 @@ public class MenuItemController {
     }
 
     @PutMapping("/{id}")
-    public MenuItem updateMenuItem(@PathVariable Long id, @RequestBody MenuItem menuItem){
+    public MenuItem updateMenuItem(@PathVariable Long id,@Valid @RequestBody MenuItem menuItem){
         return menuItemService.updateMenuItem(id,menuItem);
     }
 
