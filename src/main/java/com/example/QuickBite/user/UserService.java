@@ -1,5 +1,6 @@
 package com.example.QuickBite.user;
 
+import com.example.QuickBite.address.Address;
 import com.example.QuickBite.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -58,4 +59,10 @@ public class UserService {
         userRepository.deleteById(id);
 
     }
+
+    public User saveUser(User user) {
+        return userRepository.save(user);
+    }
+
+
 }

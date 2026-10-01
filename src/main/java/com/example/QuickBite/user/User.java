@@ -1,8 +1,12 @@
 package com.example.QuickBite.user;
 
+import com.example.QuickBite.address.Address;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -25,9 +29,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @OneToMany
+    @JoinColumn(name="user_id")
+    private List<Address> addresses = new ArrayList<>();
+
     public User() {
     }
-
 
     public User(String firstName, String lastName, String email, String password, UserRole role) {
         this.firstName = firstName;
@@ -63,6 +70,10 @@ public class User {
         return role;
     }
 
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -86,4 +97,10 @@ public class User {
     public void setRole(UserRole role) {
         this.role = role;
     }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+
 }
