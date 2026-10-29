@@ -58,7 +58,7 @@ public class CartService {
         Cart cart = findCartByUserId(userId);
         MenuItem menuItem = menuItemService.getMenuItemById(menuItemId);
 
-        if (!menuItem.isAvailable()) {
+        if (!menuItem.getAvailable()) {
             throw new IllegalArgumentException("Menu item is not available");
         }
 
